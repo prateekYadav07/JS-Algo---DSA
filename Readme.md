@@ -29,6 +29,9 @@ let t1 = performance.now()
 addUpTo(1000000000)
 let t2 = performance.now()
 console.log(`time elapsed ${(t2-t1)/1000} seconds`)
+
+for first its 1.25 sec
+for second its 0 sec (not really)
 ```
 But time depends on machine and even on same machine this method can give different readings so we needed something more standard to measure efficiency and thats why we use Big-O.
 
