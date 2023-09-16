@@ -54,7 +54,7 @@ for second implementation : 2 operations
 Big-O is denoted as O(n) similarly to f(n), and since its calculated for upper bound i.e., worst case scenario of the algorithm. n means size of input.
 
 - O(n) - linear
-- O(n^2) - quadratic
+- O(n<sup>2</sup>) - quadratic
 - O(1) - constant (independent of size of input)
 - or could be something totally different
 
@@ -83,4 +83,58 @@ function printAllPairs(n){
     }
 }
 ```
+
 > this function has O(n) operations inside O(n) operation hence its O(n^2^)
+
+### Lecture 6:
+
+_smaller numbers doesn't matter._ These big-O calculation are generally calculated for huge numbers of input so constants and smaller digits doesnt matter. for e.g:
+
+- O(n<sup>2</sup> + 3n + 2 ) -> tail is redundant -> O(n<sup>2</sup>)
+
+some shorthands are:
+
+- arithemtic operations are constant.
+- variable assignment is constant.
+- accesing elements in an array(by index) or an object(by key) is also constant.
+- In a loop, the complexity is the length of the loop times the complexity of whatever happens inside the loop.
+
+Time complexity plot:
+![Time complexity plot](./images/complexity%20plot.png)
+
+### Lecture 7:
+
+Space complexity: measure of how much space an alogrithm needs to run. _Auxiliary Space Time Complexity_ is referred as space required by algorithm to run not to store the input data. Generally both the above terms are same.
+
+some shorthands are:
+
+- primitives take constant spaces O(1)
+- Strings require O(n) space because its collection of characters.
+- Reference types are generally O(n) where n is length of array or number of keys in an object.
+
+```
+function sum(arr){
+    let total = 0;
+    for(let i =0; i<arr.length; i++){
+        total += i;
+    }
+    return total
+}
+```
+
+In this example, total and i are only space taken by algo that means it has O(1) space complexity
+
+```
+function double(arr){
+    let newArr = [];
+    for(let i =0; i<arr.length; i++){
+        newArr = newArr.push(2 * arr[i])
+    }
+    return total
+}
+```
+
+this function has O(n) space complexity
+
+### Lecture 8:
+Logarithmic time complexity O(log(n)). searching algos, efficient sorting algos and recursion involves logarithmic space complexity
