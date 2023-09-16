@@ -137,4 +137,53 @@ function double(arr){
 this function has O(n) space complexity
 
 ### Lecture 8:
+
 Logarithmic time complexity O(log(n)). searching algos, efficient sorting algos and recursion involves logarithmic space complexity
+
+## Section 2: Analyzing Performance of arrays and objects
+
+### Lecture 9:
+
+Big-O of Objects: (its quick)
+
+- Insertion - O(1)
+- Removal - O(1)
+- Searching - O(N)
+- Access - O(1)
+
+Big O of Object Methods:
+
+- Object.keys - O(N)
+- Object.values - O(N)
+- Object.entries - O(N)
+- hasOwnProperty - O(1)
+
+### Lecture 10:
+
+WHEN TO USE ARRAYS
+
+- When you need order
+- When you need fast access / insertion and removal (sort of....)
+
+Big O of Arrays:-
+
+- Insertion - It depends....
+- Removal - It depends....
+- Searching - O(N)
+- Access - O(1)
+
+> Insertion and removal at end is O(1) but from beginning its O(n) because of reassignment done by processor to make the indexes correct after insertion or removal.
+
+### Lecture 11:
+
+Big O of Array Operations:-
+
+- push - O(1)
+- pop - O(1)
+- shift - O(N)
+- unshift - O(N)
+- concat - O(N)
+- slice - O(N)
+- splice - O(N)
+- sort - O(N \* log N)
+- forEach/map/filter/reduce/etc. - O(N)
