@@ -187,3 +187,113 @@ Big O of Array Operations:-
 - splice - O(N)
 - sort - O(N \* log N)
 - forEach/map/filter/reduce/etc. - O(N)
+
+## Section 3: Problem solving approach
+
+### Lecture 12:
+
+> WHAT IS AN ALGORITHM?
+
+A process or set of steps to accomplish a certain task.
+
+> Why do I need to know this?
+
+Almost everything that you do in programming involves some kind of algorithm!
+It's the foundation for being a successful problem solving and developer
+
+Also... _*INTERVIEWS*_
+
+> PROBLEM SOLVING
+
+- Understand the Problem
+- Explore Concrete Examples
+- Break It Down
+- Solve/Simplify
+- Look Back and Refactor
+
+### Lecture 13:
+
+> UNDERSTAND THE PROBLEM
+
+1. Can I restate the problem in my own words?
+2. What are the inputs that go into the problem?
+3. What are the outputs that should come from the solution to the problem?
+4. Can the outputs be determined from the inputs? In other words, do I have enough information to solve the problem? (You may not be able to answer this question until you set about solving the problem. That's okay; it's still worth considering the question at this early stage.)
+5. How should I label the important pieces of data that are a part of the problem?
+
+> e.g: write a function which takes numbers as input and returns their sum
+
+1. Can I restate the problem in my own words?
+
+- implement addition
+
+2. What are the inputs that go into the problem?
+
+- int? float? String?
+- how many inputs ?
+- what if user doesn't pass an input?
+
+3. What are the outputs that should come from the solution to the problem?
+
+- int? float? string?
+- with what precision?
+
+and so on other questions need to be answered before starting to actually write the solution
+
+### Lecture 14:
+
+> Explore concrete examples
+
+1. Start with Simple Examples
+2. Progress to More Complex Examples
+3. Explore Examples with Empty Inputs
+4. Explore Examples with Invalid Inputs
+
+> for e.g: Write a function which takes in a string and returns counts of each character in the string.
+
+lets say charCount(str) is our function, then
+
+- charCount("aaaa") // {a:4} or {a:4, b:0, ...}
+- charCount("hello") // {h:1, e:1, l:2, o:1}
+- "my phone number is 23423532" // what about spaces, numbers special characters?
+- "Hello hi" // what about casing
+- what about invalid inputs like integer, boolean, undefined or objects.
+- what about no inputs
+
+### Lecture 15:
+
+> Break it down
+
+for e.g: Write a function which takes in a string and returns counts of each character in the string.
+
+after we have gone through all the required inputs and output criteria we can start with something like this
+
+```
+function charCount(str){
+    // make object to return at the end.
+    // loop over all the characters (str to lowercase)
+        //if the char is a number/letter then only proceed
+            // if char exist in object increase the count
+            // else add the char in object with value 1
+    // return the object
+}
+```
+
+then we can solve the solution something like this:
+
+```
+function charCount(str){
+    let countObj = {}
+    str  = str.toLowerCase()
+    str.split("").forEach((ch) => {
+        if ((ch >='0' && ch<='9') || (typeof ch.trim() == 'string' && ch.trim() !== '')){
+            if(countObj.hasOwnProperty(ch)){
+                countObj[ch] += 1
+            }else{
+                countObj[ch] =1
+            }
+        }
+    })
+    return countObj
+}
+```
