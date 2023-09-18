@@ -284,8 +284,7 @@ then we can solve the solution something like this:
 ```
 function charCount(str){
     let countObj = {}
-    str  = str.toLowerCase()
-    str.split("").forEach((ch) => {
+    str.toLowerCase().split("").forEach((ch) => {
         if ((ch >='0' && ch<='9') || (typeof ch.trim() == 'string' && ch.trim() !== '')){
             if(countObj.hasOwnProperty(ch)){
                 countObj[ch] += 1
@@ -297,3 +296,37 @@ function charCount(str){
     return countObj
 }
 ```
+
+### Lecture 16:
+
+> solve/simplify
+
+just start solving the problem with whatever part you can resolve first, build the structure and then try some cases which you expected to pass. Then solve the stuck part with a little bit of more brainstorming.
+
+- Find the core difficulty in what you're trying to do
+- Temporarily ignore that difficulty
+- Write a simplified solution
+- Then incorporate that difficulty back in
+
+### Lecture 17:
+
+> LOOK Back & REFACTOR
+
+REFACTORING QUESTIONS:
+
+- Can you check the result?
+- Can you derive the result differently?
+- Can you understand it at a glance?
+- Can you use the result or method for some other problem?
+- Can you improve the performance of your solution?
+- Can you think of other ways to refactor?
+- How have other people solved this problem?
+
+so for e.g, after refactoring we have an efficient way for that if condition:
+
+```
+// if ((ch >='0' && ch<='9') || (typeof ch.trim() == 'string' && ch.trim() !== ''))
+
+if(/[a-z0-9]/.test(ch))
+```
+this will test for numbers and strings and exclude special characters and spaces.
