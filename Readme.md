@@ -330,3 +330,33 @@ so for e.g, after refactoring we have an efficient way for that if condition:
 if(/[a-z0-9]/.test(ch))
 ```
 this will test for numbers and strings and exclude special characters and spaces.
+
+further optimizations led to
+
+```
+function charCount(str){
+    let countObj = {}
+    for(let ch of str){
+        if(isAlphaNumeric(ch)){
+            ch = ch.toLowerCase()
+            countObj[ch] = ++countObj[ch] || 1
+        }
+    }
+    return countObj
+}
+
+function isAlphaNumeric(char){
+    let code = char.charCodeAt(0)
+    if(!(code > 47 && code < 58) &&
+       !(code > 64 && code < 91) &&
+       !(code > 96 && code < 123)){
+        return false;
+    }
+    return true
+}
+
+charCount("Hello hi!!")
+
+output: {h: 2, e: 1, l: 2, o: 1, i: 1}
+```
+
