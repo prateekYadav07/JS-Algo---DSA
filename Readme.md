@@ -329,6 +329,7 @@ so for e.g, after refactoring we have an efficient way for that if condition:
 
 if(/[a-z0-9]/.test(ch))
 ```
+
 this will test for numbers and strings and exclude special characters and spaces.
 
 further optimizations led to
@@ -360,3 +361,81 @@ charCount("Hello hi!!")
 output: {h: 2, e: 1, l: 2, o: 1, i: 1}
 ```
 
+## Section 4: Problem solving patterns
+
+### Lecture 18: Intro to problem solving patterns
+
+SOME PATTERNS...
+
+    Frequency Counter
+    Multiple Pointers
+    Sliding Window
+    Divide and Conquer
+    Dynamic Programming
+    Greedy Algorithms
+    Backtracking
+    Many more!
+
+### Lecture 19: Frequency counter pattern
+
+This pattern uses objects or sets to collect values/frequencies of values
+
+This can often avoid the need for nested loops or O(N^2) operations with arrays / strings
+
+AN EXAMPLE
+
+Write a function called same, which accepts two arrays. The function should return true if every value in the array has it's corresponding value squared in the second array. The frequency of values must be the same.
+
+    same([1,2,3], [4,1,9]) // true
+    same([1,2,3], [1,9]) // false
+    same([1,2,1], [4,4,1]) // false (must be same frequency)
+
+Naive approach - O(n\*\*2):
+
+```
+function same(arr1, arr2){
+    if(arr1.length !== arr2.length)
+        return false
+
+    for(let num of arr1){
+        correctIndex = arr2.indexOf(num**2)
+        if(correctIndex === -1)
+            return false
+        arr2.splice(correctIndex,1)
+        console.log(arr2)
+    }
+    return true
+}
+
+same([1,2,3,5], [1,4,4,9])
+```
+
+Refactored solution - O(n): make objects and store frequency of contents in array then compare it.
+
+```
+function same(arr1, arr2){
+    if(arr1.length !== arr2.length)
+        return false
+
+    let frequencyCounter1 = {}
+    let frequencyCounter2 = {}
+
+    arr1.forEach((num) => {
+        frequencyCounter1[num] = (frequencyCounter1[num] || 0) + 1
+    })
+
+    arr2.forEach((num) => {
+        frequencyCounter2[num] = (frequencyCounter2[num] || 0) + 1
+    })
+
+    arr1.forEach((num) => {
+        if(frequencyCounter1[num] !== frequencyCounter2[num**2]
+           || !(num ** 2 in frequencyCounter2))
+            return false
+    })
+
+    return true
+}
+
+same([1,2,3,2], [1,4,4,4])
+```
