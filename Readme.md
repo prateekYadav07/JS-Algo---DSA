@@ -454,7 +454,7 @@ function validAnagram(str1, str2){
 
     for(let ch of str1)
         freqCounter1[ch] = (freqCounter1[ch] || 0) + 1
-    
+
     for(let ch of str2)
         freqCounter2[ch] = (freqCounter2[ch] || 0) + 1
 
@@ -473,3 +473,163 @@ validAnagram('awesome', 'awesom') // false
 validAnagram('qwerty', 'qeywrt') // true
 validAnagram('texttwisttime', 'timetwisttext') // true
 ```
+
+a more optimized solution using just one object
+
+```
+function validAnagram(str1, str2){
+    if(str1.length !== str2.length)
+        return false
+
+    let lookup = {}
+    for(let ch of str2)
+        lookup[ch] = (lookup[ch] || 0) + 1
+
+    for(let ch of str1){
+        if(!(ch in lookup))
+            return false
+        lookup[ch]-=1
+    }
+
+    return true
+}
+```
+
+### Lecture 21: Multiple pointers
+
+Creating pointers or values that correspond to an index or position and move towards the beginning, end or middle based on a certain condition
+
+Very efficient for solving problems with minimal space complexity as well
+
+for eg: Write a function called sumZero which accepts a sorted array of integers. The function should find the first pair where the sum is 0. Return an array that includes both values that sum to zero or undefined if a pair does not exist
+
+naive solution:
+
+```
+function sumZero(arr){
+    for(let i=0; i<arr.length; i++){
+        for(let j= i+1; j<arr.length; j++){
+            if(arr[i]+arr[j] === 0){
+                return [arr[i], arr[j]]
+            }
+        }
+    }
+}
+
+sumZero([-3,-2,-1,0,2,3,4])
+```
+
+refactored solution:
+
+```
+function sumZero(arr) {
+    let left = 0
+    let right = arr.length - 1
+    while (left<right) {
+        sum = arr[left] + arr[right]
+        if(sum === 0)
+            return [arr[left], arr[right]]
+        sum > 0 ? right-- : left++
+    }
+}
+
+sumZero([-3,-2,-1,0,4])
+```
+
+### Lecture 22-23: Count Unique values problem
+
+Implement a function called countUniqueValues, which accepts a sorted array, and counts the unique values in the array. There can be negative numbers in the array, but it will always be sorted.
+
+first approach when input arr can be modified:
+
+```
+function countUniqueValues(arr) {
+    if(arr.length === 0)
+        return 0
+    let i = 0
+    let j = 1
+    while(j < arr.length){
+        if(arr[i] !== arr[j]){
+            i+=1
+            arr[i] = arr[j]
+        }
+        j += 1
+    }
+    return i+1
+}
+
+countUniqueValues([1,2,3,4,4,4,7,7,12,12,13]) //7
+```
+
+second approach when input arr can't be modified.
+
+```
+function countUniqueValues2(arr) {
+    if(arr.length === 0)
+        return 0
+    let i = 0
+    let j = 1
+    let uniqueValues = 0
+    while(j < arr.length){
+        if(arr[i] !== arr[j]){
+            uniqueValues+=1
+            i = j
+        }
+        j += 1
+    }
+    return uniqueValues
+}
+```
+
+### Lecture 24: SLIDING WINDOW
+
+This pattern involves creating a window which can either be an array or number from one position to another
+
+Depending on a certain condition, the window either increases or closes (and a new window is created)
+
+Very useful for keeping track of a subset of data in an array/string etc.
+
+example:
+Write a function called maxSubarraySum which accepts an array of integers and a number called n. The function should calculate the maximum sum of n consecutive elements in the array.
+
+naive approach - O(n**2)
+
+```
+function maxSubarraySum(arr,num) {
+    if(arr.length === 0)
+        return null
+    let maxSum = -Infinity
+    for(let i=0 ; i < arr.length; i++){
+        tempMax = 0
+        for(let j=0 ;j < num; j++){
+            tempMax += arr[i+j]
+        }
+        if(tempMax>maxSum)
+            maxSum = tempMax
+    }
+
+    return maxSum
+}
+
+maxSubarraySum([1,2,5,2,8,1,5],4)
+```
+optimized approach - sliding window - O(n)
+
+```
+function maxSubarraySum(arr,num) {
+    if(arr.length === 0)
+        return null
+    let tempMax = 0;
+    for(let i = 0; i<num; i++)
+        tempMax += arr[i]
+    let maxSum = tempMax
+    for(let j= num; j< arr.length; j++){
+        tempMax = tempMax + arr[j] - arr[j-num]
+        maxSum = Math.max(tempMax, maxSum)
+    }
+    return maxSum
+}
+
+maxSubarraySum([1,2,5,2,8,1,5],4)
+```
+
