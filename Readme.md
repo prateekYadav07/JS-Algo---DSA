@@ -592,7 +592,7 @@ Very useful for keeping track of a subset of data in an array/string etc.
 example:
 Write a function called maxSubarraySum which accepts an array of integers and a number called n. The function should calculate the maximum sum of n consecutive elements in the array.
 
-naive approach - O(n**2)
+naive approach - O(n\*\*2)
 
 ```
 function maxSubarraySum(arr,num) {
@@ -613,6 +613,7 @@ function maxSubarraySum(arr,num) {
 
 maxSubarraySum([1,2,5,2,8,1,5],4)
 ```
+
 optimized approach - sliding window - O(n)
 
 ```
@@ -633,3 +634,116 @@ function maxSubarraySum(arr,num) {
 maxSubarraySum([1,2,5,2,8,1,5],4)
 ```
 
+## Section 5: Challenges
+
+### challenge 1:
+
+Frequency Counter - sameFrequency
+
+Write a function called sameFrequency. Given two positive integers, find out if the two numbers have the same frequency of digits.
+
+Your solution MUST have the following complexities:
+
+Time: O(N)
+
+Sample Input:
+
+    sameFrequency(182,281) // true
+    sameFrequency(34,14) // false
+    sameFrequency(3589578, 5879385) // true
+    sameFrequency(22,222) // false
+
+```
+function sameFrequency(num1, num2) {
+    let arr1 = String(num1).split('')
+    let arr2 = String(num2).split('')
+
+    if(arr1.length !== arr2.length)
+        return false
+
+    // make a lookup counter
+    let lookupCounter = {}
+    for(let x of arr2)
+        lookupCounter[x] = (lookupCounter[x] || 0) + 1
+
+    for(let x of arr1){
+        // compare if x in lookup counter, if not return false
+        if(!(x in lookupCounter))
+            return false
+        //reduce count in lookup
+        lookupCounter[x] -=1
+    }
+
+    return true
+
+}
+```
+
+### challenge 2:
+
+Frequency Counter / Multiple Pointers - areThereDuplicates
+
+Implement a function called, areThereDuplicates which accepts a variable number of arguments, and checks whether there are any duplicates among the arguments passed in. You can solve this using the frequency counter pattern OR the multiple pointers pattern.
+
+Examples:
+
+    areThereDuplicates(1, 2, 3) // false
+    areThereDuplicates(1, 2, 2) // true
+    areThereDuplicates('a', 'b', 'c', 'a') // true
+
+Restrictions:  
+Time - O(n)  
+Space - O(n)  
+Bonus:  
+Time - O(n log n)  
+Space - O(1)
+
+- frequency counter solution
+
+```
+function areThereDuplicates(...args) {
+    if(args.length === 0 || args.length === 1)
+        return false
+
+    let map = new Map()
+    for (let x of args) {
+        if(map.has(x))
+            return true
+        map.set(x,(map.get(x) || 0) + 1)
+    }
+
+    return false
+}
+```
+
+- multiple pointers solution (requires sort)
+
+```
+function areThereDuplicates(...args) {
+    if(args.length === 0 || args.length === 1)
+        return false
+
+    args.sort((a,b) => {
+        if(a>b) return 1
+        if(a<b) return -1
+        return 0
+    })
+
+    let start = 0
+    let next = 1
+    while (next<args.length) {
+        if(args[start] === args[next])
+            return true
+        start++
+        next++
+    }
+    return false
+}
+```
+
+- oneliner using Set
+```
+function oneLiner(...args){
+    return new Set(args).length !== args.length
+}
+```
