@@ -744,6 +744,35 @@ function areThereDuplicates(...args) {
 - oneliner using Set
 ```
 function oneLiner(...args){
-    return new Set(args).length !== args.length
+    return new Set(args).size !== args.length
 }
+```
+### leetcode - removeDuplicates
+[Remove Duplicates](https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/)
+```
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var removeDuplicates = function(nums) {
+    if(nums.length === 0)
+        return 0
+    if(nums.length === 1)
+        return 1
+    let start = 0;
+    let next = 1;
+    while(next < nums.length){
+        // check if value at start != next
+        if(nums[start] !== nums[next]){
+            // increase start by 1
+            start += 1
+            // move value at next to start
+            nums[start] = nums[next]
+        }
+        // increase the next pointer
+        next++;
+    }
+    return new Set(nums).size
+};
+
 ```
