@@ -776,3 +776,30 @@ var removeDuplicates = function(nums) {
 };
 
 ```
+
+### leetcode - removeElement
+[Remove element](https://leetcode.com/problems/remove-element/description/)
+```
+/**
+ * @param {number[]} nums
+ * @param {number} val
+ * @return {number}
+ */
+var removeElement = function(nums, val) {
+    if(nums.length === 0){
+        return 0
+    }
+
+    let lookup = 0;
+    while(lookup < nums.length){
+        // check if value at lookup equals val
+        if(nums[lookup] === val){
+            nums.splice(lookup,1)
+        }else{
+            // increment lookup 
+            lookup++;   
+        }
+    }
+    return nums.length
+};
+```
