@@ -845,3 +845,44 @@ function averagePair(arr, avg){
     return false
 }
 ```
+
+### challenge 4 : Multiple Pointers - isSubsequence
+
+Write a function called isSubsequence which takes in two strings and checks whether the characters in the first string form a subsequence of the characters in the second string. In other words, the function should check whether the characters in the first string appear somewhere in the second string, without their order changing.
+
+Examples:
+
+    isSubsequence('hello', 'hello world'); // true
+    isSubsequence('sing', 'sting'); // true
+    isSubsequence('abc', 'abracadabra'); // true
+    isSubsequence('abc', 'acb'); // false (order matters)
+
+Your solution MUST have AT LEAST the following complexities:
+
+Time Complexity - O(N + M)
+
+Space Complexity - O(1)
+
+```
+function isSubsequence(str1, str2) {
+    // good luck. Add any arguments you deem necessary.
+    if(!(str1 || str2))
+        return false
+
+    let s = 0
+    str1 = str1.split("")
+    while (s < str2.length) {
+        //check if ch at s in str2 exist in str1 and also
+        //equal to character at 0 in str1
+        if(str1[0] === str2[s]){
+            // if true then splice the str1 by 1
+            str1.splice(0,1)
+        }
+        // increase s by 1
+        s++
+    }
+
+    //return true if str1 has 0 length or return false
+    return str1.length ? false : true
+}
+```
