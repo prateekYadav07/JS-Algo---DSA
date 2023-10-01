@@ -863,6 +863,8 @@ Time Complexity - O(N + M)
 
 Space Complexity - O(1)
 
+O(N2) approach
+
 ```
 function isSubsequence(str1, str2) {
     // good luck. Add any arguments you deem necessary.
@@ -884,5 +886,76 @@ function isSubsequence(str1, str2) {
 
     //return true if str1 has 0 length or return false
     return str1.length ? false : true
+}
+```
+O(N+M) approach
+```
+function isSubsequence(str1, str2) {
+    // good luck. Add any arguments you deem necessary.
+    if(!(str1 || str2))
+        return false
+
+    let s = 0
+    let t = 0
+    str1 = str1.split("")
+    while (s < str2.length) {
+        //check if value at s in str2 equals value at t in str1
+        if(str1[t] === str2[s])
+            t++
+        //check if t equals str1.length then return true
+        if(str1.length == t)
+            return true
+        // increase s by 1
+        s++
+    }
+
+    //return true if str1 has 0 length or return false
+    return false
+}
+ 
+isSubsequence('abc', 'acb');
+```
+
+### challenge 5: Sliding Window - maxSubarraySum
+
+Given an array of integers and a number, write a function called maxSubarraySum, which finds the maximum sum of a subarray with the length of the number passed to the function.
+
+Note that a subarray must consist of consecutive elements from the original array. In the first example below, [100, 200, 300] is a subarray of the original array, but [100, 300] is not.
+
+    maxSubarraySum([100,200,300,400], 2) // 700
+    maxSubarraySum([1,4,2,10,23,3,1,0,20], 4)  // 39 
+    maxSubarraySum([-3,4,0,-2,6,-1], 2) // 5
+    maxSubarraySum([3,-2,7,-4,1,-1,4,-2,1],2) // 5
+    maxSubarraySum([2,3], 3) // null
+
+Constraints:
+
+Time Complexity - O(N)
+
+Space Complexity - O(1)
+
+```
+function maxSubarraySum(arr, num){
+    // add whatever parameters you deem necessary - good luck!
+    if(arr.length < num || arr.length === 0){
+        return null
+    }
+
+    let max = 0
+    for(let i =0 ;i<num; i++){
+        max += arr[i]
+    }
+
+    let tempMax = max
+    for(let j = num;j <arr.length; j++){
+        tempMax = tempMax + arr[j] - arr[j-num]
+        // check if tempMax > max
+        if(tempMax > max){
+            // if true then assign tempMax to max
+            max = tempMax
+        }
+    }
+
+    return max    
 }
 ```
