@@ -1045,3 +1045,53 @@ function findLongestSubstring(str) {
       return longest;
     }
 ```
+
+## Section 6: Recursion
+
+### Lecture 25: What is recursion?
+
+A process (a function in our case) that calls itself
+
+### Lecture 26: Why is recursion?
+
+It's EVERYWHERE!
+
+- JSON.parse / JSON.stringify
+- document.getElementById and DOM traversal algorithms
+- Object traversal
+- Very common with more complex algorithms
+- It's sometimes a cleaner alternative to iteration
+
+### Lecture 27: The call stack
+when a function is called inside another function its placed on top of calling function in call stack. In case of recursion, since a function is calling itself than its keep getting stacked in call stack. So we need some conditions to return and exit function i.e called base condition.
+
+
+### Lecture 28: How recursive functions work
+
+Invoke the same function with a different input until you reach your base case!, basically ending the call stack with some conditions
+
+Base Case: The condition when the recursion ends.
+Two essential parts of a recursive function!:
+
+- Base Case
+- Different Input
+
+e.g: 
+```
+function countDown(num){
+    if(num <= 0) {
+        console.log("All done!");
+        return;
+    }
+    console.log(num);
+    num--;
+    countDown(num);
+}
+```
+
+
+
+
+
+
+
