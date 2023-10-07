@@ -1063,8 +1063,8 @@ It's EVERYWHERE!
 - It's sometimes a cleaner alternative to iteration
 
 ### Lecture 27: The call stack
-when a function is called inside another function its placed on top of calling function in call stack. In case of recursion, since a function is calling itself than its keep getting stacked in call stack. So we need some conditions to return and exit function i.e called base condition.
 
+when a function is called inside another function its placed on top of calling function in call stack. In case of recursion, since a function is calling itself than its keep getting stacked in call stack. So we need some conditions to return and exit function i.e called base condition.
 
 ### Lecture 28: How recursive functions work
 
@@ -1076,7 +1076,8 @@ Two essential parts of a recursive function!:
 - Base Case
 - Different Input
 
-e.g: 
+e.g:
+
 ```
 function countDown(num){
     if(num <= 0) {
@@ -1089,9 +1090,92 @@ function countDown(num){
 }
 ```
 
+### Lecture 29: Helper method recursion:
 
+Its a pattern of recursive way of doing things. A helper function is defined inside a function and called recursively and alter the values of outside scope.
 
+```
+function outer(input){
+    var outerScopedVariable = []
 
+    function helper(helperInput){
+        // modify the outerScopedVariable
+        helper(helperInput--)
+    }
 
+    helper(input)
+    return outerScopedVariable;
+}
+```
+
+lets take an example of collecting odd numbers from an array recursively
+
+```
+function collectOddValues(arr){
+
+    let result = []
+
+    function helper(helperInput){
+        // base condition
+        if(helperInput.length === 0) {
+            return;
+        }
+
+        if(helperInput[0] % 2 !== 0){
+            result.push(helperInput[0])
+        }
+
+        // it is called with smaller input each time
+        helper(helperInput.slice(1))
+    }
+    helper(arr)
+    return result;
+}
+```
+
+or factorial recursively using helper
+
+```
+function factorial(params) {
+    let result = 1
+
+    function helper(helperInput) {
+        if(helperInput === 0)
+            return 1
+
+        result *= helperInput
+        helper(helperInput-1)
+    }
+
+    helper(params)
+    return result
+}
+```
+
+### Lecture 30: Pure Recursion
+calling the same method inside another method in a way that the result is returned from the first array itself. e.g:
+
+```
+function collectOddValues(arr){
+    let newArr = [];
+    
+    if(arr.length === 0) {
+        return newArr;
+    }
+        
+    if(arr[0] % 2 !== 0){
+        newArr.push(arr[0]);
+    }
+        
+    newArr = newArr.concat(collectOddValues(arr.slice(1)));
+    return newArr;
+}
+```
+
+Pure Recursion Tips
+
+- For arrays, use methods like slice, the spread operator, and concat that make copies of arrays so you do not mutate them
+- Remember that strings are immutable so you will need to use methods like slice, substr, or substring to make copies of strings
+- To make copies of objects use Object.assign, or the spread operator
 
 
