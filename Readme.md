@@ -1178,4 +1178,39 @@ Pure Recursion Tips
 - Remember that strings are immutable so you will need to use methods like slice, substr, or substring to make copies of strings
 - To make copies of objects use Object.assign, or the spread operator
 
+### leetcode - plusOne
+
+[plus one](https://leetcode.com/problems/plus-one/)
+```
+/**
+ * @param {number[]} digits
+ * @return {number[]}
+ */
+var plusOne = function(digits) {
+    if(digits.length===0){
+        return []
+    }
+
+    let end = digits.length-1
+    let lastValue = digits[end] + 1
+    while(end>-1){
+        if(lastValue<10){
+            digits[end] = lastValue
+            break
+        }
+        let rem = lastValue % 10
+        let quot = Math.floor(lastValue / 10)
+        if(end===0){
+            digits[0] = rem
+            digits.unshift(quot)
+            return digits
+        }
+        digits[end] = rem
+        end--
+        digits[end] += quot
+        lastValue = digits[end]
+    }
+    return digits
+};
+```
 
