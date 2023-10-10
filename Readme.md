@@ -1213,4 +1213,30 @@ var plusOne = function(digits) {
     return digits
 };
 ```
+### leetcode - searchRange
+[search range](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/description/)
 
+```
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+var searchRange = function(nums, target) {
+    // it will be faster with binary sort but this is more iterative approach 
+    if(nums.length===0 || !nums.includes(target)){
+        return [-1,-1]
+    }
+
+    let result = []
+    let start = 0
+    while(start<nums.length){
+        if(nums[start] === target){
+            result.push(start)
+        }
+        start++
+    }
+
+    return [result[0], result[result.length-1]]
+};
+```
