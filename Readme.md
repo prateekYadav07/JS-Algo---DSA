@@ -1258,3 +1258,36 @@ var groupAnagrams = function(strs) {
     return Array.from(map.values())
 }
 ```
+### leetcode - group anagrams
+[Find All Anagrams in a String](https://leetcode.com/problems/find-all-anagrams-in-a-string/description/)
+```
+/**
+ * @param {string} s
+ * @param {string} p
+ * @return {number[]}
+ */
+var findAnagrams = function(s, p) {
+
+    let lookup = {}
+    let result = []
+    for(let ch of p){
+        lookup[ch] = (lookup[ch] || 0) + 1
+    }
+
+    let l = 0
+    let r = 0
+    while(r<s.length){
+        let ch = s[r]
+        if(lookup[ch]>0){
+            lookup[ch]--;
+            if(r-l + 1 === p.length) result.push(l)
+            r++;
+        }else {
+            if(lookup[s[l]] !== undefined) lookup[s[l]]++
+            l++
+            if(l>r) r = l            
+        }
+    }
+    return result
+};
+```
