@@ -1291,3 +1291,36 @@ var findAnagrams = function(s, p) {
     return result
 };
 ```
+
+### leetcode - 3Sum
+[three sum](https://leetcode.com/problems/3sum/)
+
+```
+/**
+ * @param {number[]} nums
+ * @return {number[][]}
+ */
+var threeSum = function(nums) {
+    let result = []
+    let i = 0
+    let j = 1
+    let k = j+1
+    while(j<nums.length){
+        if(nums[i] + nums[j] + nums[k] === 0){
+            let arr = [nums[i],nums[j], nums[k]]
+            if(!result.sort().join(',').includes(arr.sort().join(',')))
+                result.push(arr)
+            j++
+            k = j+1
+        }else{
+            k++
+            if(k>nums.length){
+                j++
+                k = j+1
+            }
+        }
+    }
+
+    return result
+};
+```
