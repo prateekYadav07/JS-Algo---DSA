@@ -1324,3 +1324,36 @@ var threeSum = function(nums) {
     return result
 };
 ```
+
+### leetcode - power of two
+
+[power of two](https://leetcode.com/problems/power-of-two/)
+
+```
+/**
+ * @param {number} n
+ * @return {boolean}
+ */
+var isPowerOfTwo = function(n) {
+
+    // bitwise manipulation,
+    // 2(10) 4(100) 8(1000),  6(110)
+    return n > 0 ? !(n & (n-1)) : false
+
+    // recursive approach (faster, still can be improved):
+    if(n===1)
+        return true
+    
+    if(n%2!==0 || n===0)
+        return false
+
+    return isPowerOfTwo(n/2)
+
+    // works but less optimized
+    // while(n>1){
+    //     n=n/2
+    // }
+
+    // return n===1 ? true : false
+};
+```
