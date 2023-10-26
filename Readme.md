@@ -1594,3 +1594,94 @@ const obj = {
 
 collectStrings(obj) // ["foo", "bar", "baz"])
 ```
+
+## Section 7: Searching Algorithms
+
+### Objectives:
+1. Describe what a searching algorithm is
+2. Implement linear search on arrays
+3. Implement binary search on sorted arrays
+4. Implement a naive string searching algorithm
+5. Implement the KMP string searching algorithm
+
+### Lecture 31: JavaScript has search!
+
+There are many different search methods on arrays in JavaScript:
+
+    indexOf
+    includes
+    find
+    findIndex
+
+But how do these functions work? "Linear search"
+
+Pseudo code for *linear search*
+
+- This function accepts an array and a value
+- Loop through the array and check if the current array element is equal to the value
+- If it is, return the index at which the element is found
+- If the value is never found, return -1
+
+### Lecture 32: Linear Search
+
+Write a function called linearSearch which accepts an array and a value, and returns the index at which the value exists. If the value does not exist in the array, return -1.
+
+Don't use indexOf to implement this function!
+
+Examples:
+
+    linearSearch([10, 15, 20, 25, 30], 15) // 1
+    linearSearch([9, 8, 7, 6, 5, 4, 3, 2, 1, 0], 4) // 5
+    linearSearch([100], 100) // 0
+    linearSearch([1,2,3,4,5], 6) // -1
+    linearSearch([9, 8, 7, 6, 5, 4, 3, 2, 1, 0], 10) // -1
+    linearSearch([100], 200) // -1
+
+```
+function linearSearch(arr, value){
+    for(let i=0; i<arr.length; i++){
+        if(arr[i] === value)
+            return i
+    }
+    
+    return -1
+}
+```
+
+BIG-O is O(1) best, O(n) is worst and average
+
+### Lecture 33: Binary Search
+
+-    Binary search is a much faster form of search
+-    Rather than eliminating one element at a time, you can eliminate half of the remaining elements at a time
+-    Binary search only works on sorted arrays!
+
+pseudocode:
+-    This function accepts a sorted array and a value
+-    Create a left pointer at the start of the array, and a right pointer at the end of the array
+-    While the left pointer comes before the right pointer:
+> -    Create a pointer in the middle
+> -    If you find the value you want, return the index
+ >-    If the value is too small, move the left pointer up
+> -    If the value is too large, move the right pointer down
+-    If you never find the value, return -1
+
+```
+function binarySearch(arr,val){
+    let l = 0
+    let r = arr.length - 1
+    let m = Math.floor((l + r) / 2)
+    while(l<=r){
+        if(arr[m] === val)
+            return m
+        else if(arr[m] > val)
+            r = m - 1
+        else
+            l = m + 1
+        
+        m = Math.floor((l + r) / 2)
+    }
+    
+    return -1
+}
+```
