@@ -1722,3 +1722,45 @@ function naiveSearch(str, val){
 findPatternString("wozogomgzoomg", "omg")
 ```
 
+### leetcode - search in sorted array
+
+[search in sorted array](leetcode.com/problems/search-in-rotated-sorted-array/)
+
+```
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+var search = function(nums, target) {
+    let l = 0
+    let r = nums.length - 1
+
+    while(l<=r){
+        let m = Math.floor((l+r)/2)
+        let nl = nums[l]
+        let nm = nums[m]
+        let nr = nums[r]
+
+        if(nm === target) return m
+
+        if(nl <= nm){
+            if(nl <= target && target <= nm){
+                r = m - 1
+            }else{
+                l = m + 1
+            }
+        }
+        else{
+            if(nm <= target && target <= nr){
+                l = m + 1
+            }else{
+                r = m - 1
+            }
+        }
+    }
+
+    return -1
+};
+```
+
