@@ -1764,3 +1764,29 @@ var search = function(nums, target) {
 };
 ```
 
+### leetcode - Successful Pairs of Spells and Potions
+
+[Successful Pairs of Spells and Potions
+](https://leetcode.com/problems/successful-pairs-of-spells-and-potions)
+
+```
+var successfulPairs = function(spells, potions, success) {
+    let result = []
+    potions =  potions.sort(function(a,b){return a-b})
+    for(let i=0; i<spells.length; i++){
+        let l = 0
+        let r = potions.length-1
+        while(l<=r){
+            let m = Math.floor((l+r)/2)
+            if(spells[i] * potions[m] < success){
+                l = m+1
+            }else{
+                r = m-1
+            }
+        }
+        result.push(potions.length-l)
+    }
+
+    return result
+}
+```
