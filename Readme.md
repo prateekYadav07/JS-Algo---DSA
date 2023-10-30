@@ -1685,3 +1685,40 @@ function binarySearch(arr,val){
     return -1
 }
 ```
+
+- ### Big O of Binary Search
+
+Worst and average case is O(log(n)), best case is O(1). It is because the number of operations performed is getting halved in every iteration.
+
+### Lecture 34: Naive String Search
+
+- Suppose you want to count the number of times a smaller string appears in a longer string
+- A straightforward approach involves checking pairs of characters individually
+
+
+Pseudocode
+
+-    Loop over the longer string
+-   Loop over the shorter string
+-   If the characters don't match, break out of the inner loop
+-    If the characters do match, keep going
+-   If you complete the inner loop and find a match, increment the count of matches
+-   Return the count
+
+```
+function naiveSearch(str, val){
+    let result = 0
+    let i = 0
+    while(i<str.length){
+        for(let j=0; j<val.length; j++){
+            if(val[j] !== str[i+j]) break    
+            if(j===val.length-1) result++
+        }
+        i++
+    }
+    return result
+}
+
+findPatternString("wozogomgzoomg", "omg")
+```
+
