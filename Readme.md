@@ -1790,3 +1790,40 @@ var successfulPairs = function(spells, potions, success) {
     return result
 }
 ```
+
+## section 8: Sorting algorithms
+
+
+Objectives
+
+-    Implement bubble sort
+-    Implement selection sort
+-    Implement insertion sort
+-    Understand why it is important to learn these simpler sorting algorithms
+
+### Lecture 35: What is sorting?
+
+Sorting is the process of rearranging the items in a collection (e.g. an array) so that the items are in some kind of order.
+
+Examples
+
+- Sorting numbers from smallest to largest
+- Sorting names alphabetically
+- Sorting movies based on release year
+- Sorting movies based on revenue
+
+### Lecture 36: JavaScript has a sort method
+but it doesn't always work as expected
+
+
+Telling JavaScript how to sort
+
+- The built-in sort method accepts an optional comparator function
+- You can use this comparator function to tell JavaScript how you want it to sort
+- The comparator looks at pairs of elements (a and b), determines their sort order based on the return value
+
+> -    If it returns a negative number, a should come before b
+> -    If it returns a positive number, a should come after b,
+> -    If it returns 0, a and b are the same as far as the sort is concerned
+
+
