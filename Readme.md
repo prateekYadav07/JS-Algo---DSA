@@ -1826,4 +1826,54 @@ Telling JavaScript how to sort
 > -    If it returns a positive number, a should come after b,
 > -    If it returns 0, a and b are the same as far as the sort is concerned
 
+### Lecture 37: Bubble Sort
 
+BubbleSort Pseudocode
+
+- Start looping from with a variable called i the end of the array towards the beginning
+- Start an inner loop with a variable called j from the beginning until i - 1
+- If arr[j] is greater than arr[j+1], swap those two values!
+- Return the sorted array
+
+```
+function swap(arr,idx1,idx2){
+    let temp = arr[idx1]
+    arr[idx1] = arr[idx2]
+    arr[idx2] = temp
+}
+
+function bubbleSort(arr){
+    for(let i=arr.length - 1; i>=0; i--){
+        for(let j= 0; j < i-1; j++){
+            if(arr[j] > arr[j+1])
+                swap(arr,j,j+1)
+        }
+    }
+    
+    return arr
+}
+```
+
+In case of nearly sorted arrays we can optimize further
+
+```
+function bubbleSort(arr){
+    let counter = 0
+    let swapped;
+    for(let i=arr.length - 1; i>=0; i--){
+        swapped = false;
+        for(let j= 0; j < i-1; j++){
+            counter++
+            if(arr[j] > arr[j+1]){
+                swapped = true
+                swap(arr,j,j+1)
+            }
+        }
+        if(!swapped) break
+    }
+    console.log(counter)
+    return arr
+}
+```
+
+Generally time complexity of bubble sort is O(n2) but with nearly sorted data and noSwap optimization its nearly linear which is best case. But its still not the best choice for sorting unless we know our data is almost sorted.
