@@ -1793,7 +1793,6 @@ var successfulPairs = function(spells, potions, success) {
 
 ## section 8: Sorting algorithms
 
-
 Objectives
 
 -    Implement bubble sort
@@ -1877,3 +1876,58 @@ function bubbleSort(arr){
 ```
 
 Generally time complexity of bubble sort is O(n2) but with nearly sorted data and noSwap optimization its nearly linear which is best case. But its still not the best choice for sorting unless we know our data is almost sorted.
+
+### Lecture 38: Selection Sort
+
+Similar to bubble sort, but instead of first placing large values into sorted position, it places small values into sorted position
+
+```
+[ 5, 3, 4, 1, 2 ]
+[ 5, 3, 4, 1, 2 ]
+[ 5, 3, 4, 1, 2 ]
+[ 5, 3, 4, 1, 2 ]
+[ 1, 3, 4, 5, 2 ]
+
+1 is now in its sorted position!
+```
+
+Selection Sort Pseudocode
+
+- Store the first element as the smallest value you've seen so far.
+- Compare this item to the next item in the array until you find a smaller number.
+- If a smaller number is found, designate that smaller number to be the new "minimum" and continue until the end of the array.
+- If the "minimum" is not the value (index) you initially began with, swap the two values.
+- Repeat this with the next element until the array is sorted.
+
+MY SOLUTION:-
+
+```
+function swap(arr,idx1,idx2){
+    let temp = arr[idx1]
+    arr[idx1] = arr[idx2]
+    arr[idx2] = temp
+}
+
+function selectionSort(arr){
+    for(let i=0 ; i<arr.length; i++){
+        let min = arr[i]
+        let indexOfmin = i
+        let newMin = min
+        for(j=i+1;j<arr.length; j++){
+            newMin = Math.min(newMin, arr[j])
+            if(newMin === arr[j]){
+                indexOfmin = j
+            }
+        }
+        swap(arr, i, indexOfmin)
+    }
+    
+    return arr
+}
+
+```
+
+CLEANER VERSION : 
+```
+
+```
