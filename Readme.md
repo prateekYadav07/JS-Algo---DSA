@@ -1929,5 +1929,68 @@ function selectionSort(arr){
 
 CLEANER VERSION : 
 ```
+function swap(arr,idx1,idx2){
+    let temp = arr[idx1]
+    arr[idx1] = arr[idx2]
+    arr[idx2] = temp
+}
+
+function selectionSort(arr){
+    for(let i=0 ; i<arr.length; i++){
+        let lowest = i
+        for(j=i+1;j<arr.length; j++){
+            if(arr[j]<arr[lowest])
+                lowest = j
+        }
+        if(lowest !== i)
+            swap(arr, i, lowest)
+    }
+    
+    return arr
+}
+```
+
+When input is pretty large then worst case time complexity of Selection sort is O(n2) even if the no. of swaps are decreasing everytime but it does't matter when input is huge.
+
+### Lecture 39: Insertion Sort
+
+Builds up the sort by gradually creating a larger left half which is always sorted
+
+Insertion Sort Pseudocode
+
+- Start by picking the second element in the array
+- Now compare the second element with the one before it and swap if necessary.
+- Continue to the next element and if it is in the incorrect order, iterate through the sorted portion (i.e. the left side) to place the element in the correct place.
+- Repeat until the array is sorted.
+
+cleaner version: 
+```
+function insertionSort(arr){
+    for(let i=1 ;i<arr.length; i++){
+        let currentVal = arr[i]
+        for(var j=i-1; j>=0 && arr[j] > currentVal; j--){
+            arr[j+1] = arr[j]
+        }
+        arr[j+1] = currentVal
+    }
+    return arr
+}
+```
+
+In worst case scenario its O(n2) but if its almost all sorted then its much better than bubble and selection
+
+### Big O of Sorting Algorithms
+
+Algorithm 	Time Complexity (Best) 	Time Complexity (Average) 	Time Complexity (Worst) 	Space Complexity
 
 ```
+Bubble Sort 	O(n) 	O(n) 	O(n) 	O(1)
+Insertion Sort 	O(n) 	O(n) 	O(n) 	O(1)
+Selection Sort 	O(n) 	O(n) 	O(n) 	O(1)
+```
+
+- Sorting is fundamental!
+- Bubble sort, selection sort, and insertion sort are all roughly equivalent
+- All have average time complexities that are quadratic
+- We can do better...but we need more complex algorithms!
+
