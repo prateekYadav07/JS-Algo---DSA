@@ -1994,3 +1994,51 @@ Selection Sort 	O(n) 	O(n) 	O(n) 	O(1)
 - All have average time complexities that are quadratic
 - We can do better...but we need more complex algorithms!
 
+## Intermediate Sorting Algorithms
+
+Objectives
+
+- Understand the limitations of the sorting algorithms we've learned so far
+- Implement merge sort
+- Implement quick sort
+- Implement radix sort
+
+WHY LEARN THIS?
+
+- The sorting algorithms we've learned so far don't scale well
+- Try out bubble sort on an array of 100000 elements, it will take quite some time!
+- We need to be able to sort large arrays more quickly
+
+FASTER SORTS
+
+- There is a family of sorting algorithms that can improve time complexity from O(n  ) to O(n log n)
+- There's a tradeoff between efficiency and simplicity
+- The more efficient algorithms are much less simple, and generally take longer to understand
+
+Merge Sort
+
+- It's a combination of two things - merging and sorting!
+- Exploits the fact that arrays of 0 or 1 element are always sorted
+- Works by decomposing an array into smaller arrays of 0 or 1 elements, then building up a newly sorted array
+
+```
+
+How does it work?
+
+Let's visualize this!
+
+[ 8, 3, 5, 4, 7, 6, 1, 2 ]
+
+[ 8, 3, 5, 4 ] [ 7, 6, 1, 2 ]
+
+[ 8, 3 ] [ 5, 4 ] [ 1, 2 ] [ 7, 6 ]
+
+[ 8 ] [ 3 ] [ 5 ] [ 4 ] [ 7 ] [ 6 ] [ 1 ] [ 2 ]
+
+[ 3, 8 ] [ 4, 5 ] [ 6, 7 ] [ 1, 2 ] 
+
+[ 3, 4, 5, 8 ] [ 1, 2, 6, 7 ]
+
+[ 1, 2, 3, 4, 5, 6, 7, 8 ]
+
+```
