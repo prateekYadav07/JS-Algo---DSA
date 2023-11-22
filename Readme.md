@@ -2060,16 +2060,11 @@ Merging Arrays Pseudocode
 - Once we exhaust one array, push in all remaining values from the other array
 
 ```
-
-
 function mergeTwoArrays(arr1, arr2){
     let arr = []
-
     let i = 0
     let j = 0
     while(i<arr1.length && j<arr2.length){
-        console.log(arr,i,j)
-        
         if(arr1[i] <= arr2[j]){
             arr.push(arr1[i])
             i++
@@ -2079,12 +2074,35 @@ function mergeTwoArrays(arr1, arr2){
         }
     }
 
-    i>j ? arr.push(...arr1.slice(i)) : arr.push(...arr2.slice(j))
-
+    i>j ? arr.push(...arr2.slice(j)) : arr.push(...arr1.slice(i))
     return arr
 }
 
 mergeTwoArrays([1,10,50], [1,2,14,99,100])
+```
+
+### Lecture 42: complete Merge sort
+
+mergeSort Pseudocode
+
+- Break up the array into halves until you have arrays that are empty or have one element
+- Once you have smaller sorted arrays, merge those arrays with other sorted arrays until you are back at the full length of the array
+- Once the array has been merged back together, return the merged (and sorted!) array
 
 ```
+function mergeSort(arr){
+    if (arr.length <= 1) return arr
+    let N = Math.floor(arr.length/2)
+    let left = mergeSort(arr.slice(0,N))
+    let right = mergeSort(arr.slice(N))
+    return mergeTwoArrays(left,right)
+}
+```
+
+### Lecture 43: Big-O of mergeSort
+
+Best - O(nlogn)
+worst - O(nlogn)
+average - O(nlogn)
+Space complexity - O(n)
 
