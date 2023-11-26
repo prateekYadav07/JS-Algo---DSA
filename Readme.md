@@ -2075,17 +2075,17 @@ function mergeTwoArrays(arr1, arr2){
     }
 
     while(i<arr1.length){
-        result.push(arr1[i])
+        arr.push(arr1[i])
         i++
     }
     
     while(j<arr2.length){
-        result.push(arr2[j])
+        arr.push(arr2[j])
         j++
     }
 
     // spread operator will throw call stack exceeded for inputs length greater than 100M
-    <!-- i>j ? arr.push(...arr2.slice(j)) : arr.push(...arr1.slice(i)) -->
+    // i>j ? arr.push(...arr2.slice(j)) : arr.push(...arr1.slice(i))
     return arr
 }
 
@@ -2201,3 +2201,106 @@ worst case - O(n2)
 space complexity - O(logn)
 
 
+### Lecture 48: RADIX SORT
+Radix sort is a special sorting algorithm that works on lists of numbers
+It exploits the fact that information about the size of a number is encoded in the number of digits.  
+More digits means a bigger number!
+It never makes comparisons between elements!
+
+### Lecture 49: RADIX SORT HELPERS
+
+In order to implement radix sort, it's helpful to build a few helper functions first:
+
+getDigit(num, place) - returns the digit in num at the given place value
+
+```
+function getDigit(num, place){
+    return Math.floor(Math.abs(num) / Math.pow(10, place)) % 10
+}
+    getDigit(12345, 0); // 5
+    getDigit(12345, 1); // 4
+    getDigit(12345, 2); // 3
+    getDigit(12345, 3); // 2
+    getDigit(12345, 4); // 1
+    getDigit(12345, 5); // 0
+```
+
+digitCount(num) - returns the number of digits in num
+
+```
+function digitCount(num){
+    if(num === 0) return 1
+    return Math.floor(Math.log10(Math.abs(num))) + 1
+}
+
+digitCount(1); // 1
+digitCount(25); // 2
+digitCount(314); // 3
+```
+
+mostDigits(nums) - Given an array of numbers, returns the number of digits in the largest numbers in the list
+
+```
+function mostDigit(arr){
+    return arr.reduce((max,i) => {
+       return max = Math.max(max, digitCount(i)) 
+    },0)
+}
+
+mostDigits([1234, 56, 7]); // 4
+mostDigits([1, 1, 11111, 1]); // 5
+mostDigits([12, 34, 56, 78]); // 2
+```
+
+### Lecture 50: RADIX SORT PSEUDOCODE
+
+- Define a function that accepts list of numbers
+- Figure out how many digits the largest number has
+- Loop from k = 0 up to this largest number of digits
+- For each iteration of the loop:
+> Create buckets for each digit (0 to 9)
+> place each number in the corresponding bucket based on its kth digit
+- Replace our existing array with values in our buckets, starting with 0 and going up to 9
+- return list at the end!
+
+Radix Sort Implementation
+
+```
+function getDigit(num, place){
+    return Math.floor(Math.abs(num) / Math.pow(10, place)) % 10
+}
+
+function digitCount(num){
+    if(num === 0) return 1
+    return Math.floor(Math.log10(Math.abs(num))) + 1
+}
+
+function mostDigit(arr){
+    return arr.reduce((max,i) => {
+       return max = Math.max(max, digitCount(i)) 
+    },0)
+}
+
+function radixSort(arr){
+    let mostDigits = mostDigit(arr)
+    for(let i=0; i<mostDigits; i++){
+        let bucket = Array.from({length:10}, () => [])
+        for(let num of arr){
+            bucket[getDigit(num,i)].push(num)
+        }
+        arr = [].concat(...bucket)
+        console.log(arr)
+    }
+    return arr
+}
+```
+
+### Lecture 51: Big-O of radix sort
+
+n- length of array
+k- max number of digits of a number in an array
+
+Best: O(nk)
+Worst: O(nk)
+Average: O(nk)
+Space: O(n+k)
