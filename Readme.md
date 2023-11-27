@@ -1660,10 +1660,10 @@ pseudocode:
 -    This function accepts a sorted array and a value
 -    Create a left pointer at the start of the array, and a right pointer at the end of the array
 -    While the left pointer comes before the right pointer:
-> -    Create a pointer in the middle
-> -    If you find the value you want, return the index
- >-    If the value is too small, move the left pointer up
-> -    If the value is too large, move the right pointer down
+     - Create a pointer in the middle
+     - If you find the value you want, return the index
+     - If the value is too small, move the left pointer up
+     - If the value is too large, move the right pointer down
 -    If you never find the value, return -1
 
 ```
@@ -1821,9 +1821,9 @@ Telling JavaScript how to sort
 - You can use this comparator function to tell JavaScript how you want it to sort
 - The comparator looks at pairs of elements (a and b), determines their sort order based on the return value
 
-> -    If it returns a negative number, a should come before b
-> -    If it returns a positive number, a should come after b,
-> -    If it returns 0, a and b are the same as far as the sort is concerned
+  -    If it returns a negative number, a should come before b
+  -    If it returns a positive number, a should come after b,
+  -    If it returns 0, a and b are the same as far as the sort is concerned
 
 ### Lecture 37: Bubble Sort
 
@@ -2148,7 +2148,7 @@ Pivot Pseudocode
 - Grab the pivot from the start of the array 
 - Store the current pivot index in a variable (this will keep track of where the pivot should end up)
 - Loop through the array from the start until the end
-> If the pivot is greater than the current element, increment the pivot index variable and then swap the current element with the element at the pivot index
+  - If the pivot is greater than the current element, increment the pivot index variable and then swap the current element with the element at the pivot index
 - Swap the starting element (i.e. the pivot) with the pivot index
 - Return the pivot index
 
@@ -2258,8 +2258,8 @@ mostDigits([12, 34, 56, 78]); // 2
 - Figure out how many digits the largest number has
 - Loop from k = 0 up to this largest number of digits
 - For each iteration of the loop:
-> Create buckets for each digit (0 to 9)
-> place each number in the corresponding bucket based on its kth digit
+  - Create buckets for each digit (0 to 9)
+  - place each number in the corresponding bucket based on its kth digit
 - Replace our existing array with values in our buckets, starting with 0 and going up to 9
 - return list at the end!
 
@@ -2304,3 +2304,22 @@ Best: O(nk)
 Worst: O(nk)
 Average: O(nk)
 Space: O(n+k)
+
+## DATA STRUCTURES
+
+WHAT DO THEY DO?
+
+Data structures are collections of values, the relationships among them, and the functions or operations that can be applied to the data
+
+WHY SO MANY???
+
+Different data structures excel at different things.  Some are highly specialized, while others (like arrays) are more generally used.
+
+They all excel in different situations...
+Otherwise why bother learning them all??
+
+- Working with map/location data? Use a graph!
+- Need an ordered list with fast inserts/removals at the beginning and end? Use a linked list!
+- Web scraping nested HTML? Use a tree!
+- Need to write a scheduler? Use a binary heap!
+
