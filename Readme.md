@@ -2323,3 +2323,164 @@ Otherwise why bother learning them all??
 - Web scraping nested HTML? Use a tree!
 - Need to write a scheduler? Use a binary heap!
 
+## Singly Linked Lists
+
+Objectives
+- Define what a Singly Linked List is
+- Compare and contrast Linked Lists with Arrays
+- Implement insertion, removal and traversal methods on Singly Linked Lists
+
+### Lecture 52: What is a linked list?
+A data structure that contains a head, tail and length property.
+Linked Lists consist of nodes, and each node has a value and a pointer to another node or null
+
+![Singly linked list](./images/singlylinkedlist.png)
+
+Comparisons with Arrays
+
+Lists
+- Do not have indexes!
+- Connected via nodes with a next pointer
+- Random access is not allowed
+
+Arrays
+- Indexed in order!
+- Insertion and deletion can be expensive
+- Can quickly be accessed at a specific index
+
+### Lecture 53: Pushing a new node
+
+Adding a new node to the end of the Linked List!
+
+Pushing pseudocode
+
+- This function should accept a value
+- Create a new node using the value passed to the function
+- If there is no head property on the list, set the head and tail to be the newly created node
+- Otherwise set the next property on the tail to be the new node and set the tail property on the list to be the newly created node
+- Increment the length by one
+- Return the linked list
+
+```
+    push(val){
+        const node = new Node(val)
+        if(!this.isEmpty())
+            node.next = this.head
+        else
+            this.tail = node
+        this.head = node
+        this.size++
+        return this
+    }
+```
+
+### Lecture 54: Popping
+
+Removing a node from the end of the Linked List!
+
+Popping pseudocode
+
+- If there are no nodes in the list, return undefined
+- Loop through the list until you reach the tail
+- Set the next property of the 2nd to last node to be null
+- Set the tail to be the 2nd to last node
+- Decrement the length of the list by 1
+- Return the value of the node removed
+
+```
+    pop(){
+        if(this.isEmpty())
+            return undefined
+        
+        let removedNode = this.tail
+        if(this.getSize() === 1){
+            this.head = null
+            this.tail = null
+        }else{
+            let prev = this.head
+            while(prev.next !== this.tail){
+                prev = prev.next
+            }
+            prev.next = null
+            this.tail = prev
+        }
+        
+        this.size--
+        return removedNode
+    }
+```
+
+## Final Node and Singly Linked List class: 
+
+```
+class Node{
+    constructor(val){
+        this.val = val;
+        this.next = null
+    }
+}
+
+class SinglyLinkedList{
+    constructor(){
+        this.size = 0
+        this.head = null
+        this.tail = null
+    }
+    
+    isEmpty(){
+        return this.size === 0
+    }
+    
+    getSize(){
+        return this.size
+    }
+    
+    getAllNodeValues(){
+        if(this.isEmpty())
+            return []
+            
+        let curr = this.head
+        let items = []
+        while(curr){
+            items.push(curr.val)
+            curr = curr.next
+        }
+        return items
+    }
+    
+    push(val){
+        const node = new Node(val)
+        if(!this.isEmpty())
+            node.next = this.head
+        else
+            this.tail = node
+        this.head = node
+        this.size++
+        return this
+    }
+    
+    pop(){
+        if(this.isEmpty())
+            return undefined
+        
+        let removedNode = this.tail
+        if(this.getSize() === 1){
+            this.head = null
+            this.tail = null
+        }else{
+            let prev = this.head
+            while(prev.next !== this.tail){
+                prev = prev.next
+            }
+            prev.next = null
+            this.tail = prev
+        }
+        
+        this.size--
+        return removedNode
+    }
+}
+
+```
+
+
