@@ -1153,20 +1153,21 @@ function factorial(params) {
 ```
 
 ### Lecture 30: Pure Recursion
+
 calling the same method inside another method in a way that the result is returned from the first array itself. e.g:
 
 ```
 function collectOddValues(arr){
     let newArr = [];
-    
+
     if(arr.length === 0) {
         return newArr;
     }
-        
+
     if(arr[0] % 2 !== 0){
         newArr.push(arr[0]);
     }
-        
+
     newArr = newArr.concat(collectOddValues(arr.slice(1)));
     return newArr;
 }
@@ -1181,6 +1182,7 @@ Pure Recursion Tips
 ### leetcode - plusOne
 
 [plus one](https://leetcode.com/problems/plus-one/)
+
 ```
 /**
  * @param {number[]} digits
@@ -1213,7 +1215,9 @@ var plusOne = function(digits) {
     return digits
 };
 ```
+
 ### leetcode - searchRange
+
 [search range](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/description/)
 
 ```
@@ -1223,7 +1227,7 @@ var plusOne = function(digits) {
  * @return {number[]}
  */
 var searchRange = function(nums, target) {
-    // it will be faster with binary sort but this is more iterative approach 
+    // it will be faster with binary sort but this is more iterative approach
     if(nums.length===0 || !nums.includes(target)){
         return [-1,-1]
     }
@@ -1242,6 +1246,7 @@ var searchRange = function(nums, target) {
 ```
 
 ### leetcode - group anagrams
+
 [group anagrams](https://leetcode.com/problems/group-anagrams/description/)
 
 ```
@@ -1258,8 +1263,11 @@ var groupAnagrams = function(strs) {
     return Array.from(map.values())
 }
 ```
+
 ### leetcode - group anagrams
+
 [Find All Anagrams in a String](https://leetcode.com/problems/find-all-anagrams-in-a-string/description/)
+
 ```
 /**
  * @param {string} s
@@ -1285,7 +1293,7 @@ var findAnagrams = function(s, p) {
         }else {
             if(lookup[s[l]] !== undefined) lookup[s[l]]++
             l++
-            if(l>r) r = l            
+            if(l>r) r = l
         }
     }
     return result
@@ -1293,6 +1301,7 @@ var findAnagrams = function(s, p) {
 ```
 
 ### leetcode - 3Sum
+
 [three sum](https://leetcode.com/problems/3sum/)
 
 ```
@@ -1343,7 +1352,7 @@ var isPowerOfTwo = function(n) {
     // recursive approach (faster, still can be improved):
     if(n===1)
         return true
-    
+
     if(n%2!==0 || n===0)
         return false
 
@@ -1368,10 +1377,10 @@ Write a recursive function called reverse which accepts a string and returns a n
 function reverse(str){
     let result = ''
     let index = str.length-1
-    
+
     if(index===0)
         return str[index]
-        
+
     result = str[index] + reverse(str.substr(0, index))
     return result
 }
@@ -1413,19 +1422,20 @@ function someRecursive(arr, callback){
 ```
 
 ### flatten
+
 Write a recursive function called flatten which accepts an array of arrays and returns a new array with all values flattened.
 
 ```
 function flatten(arr){
     let result = []
-    
+
     for(let i=0; i<arr.length; i++){
         if(Array.isArray(arr[i]))
             result = result.concat(flatten(arr[i]))
         else
             result.push(arr[i])
     }
-    
+
     return result
 }
 
@@ -1458,14 +1468,14 @@ Write a recursive function called nestedEvenSum. Return the sum of all even numb
 ```
 function nestedEvenSum (obj) {
     let result = 0
-    
+
     for(let key in obj){
         if(typeof obj[key] === 'object')
             result += nestedEvenSum(obj[key])
         else
             result += obj[key] % 2 === 0 ? obj[key] : 0
     }
-    
+
     return result
 }
 
@@ -1523,7 +1533,7 @@ function stringifyNumbers(obj) {
         else
             result[key] = typeof obj[key] === "number" ? obj[key].toString() : obj[key]
     }
-    
+
     return result
 }
 
@@ -1572,7 +1582,7 @@ function collectStrings(obj){
         else
             result = result.concat(val)
     }
-    
+
     return result
 }
 
@@ -1598,6 +1608,7 @@ collectStrings(obj) // ["foo", "bar", "baz"])
 ## Section 7: Searching Algorithms
 
 ### Objectives:
+
 1. Describe what a searching algorithm is
 2. Implement linear search on arrays
 3. Implement binary search on sorted arrays
@@ -1615,7 +1626,7 @@ There are many different search methods on arrays in JavaScript:
 
 But how do these functions work? "Linear search"
 
-Pseudo code for *linear search*
+Pseudo code for _linear search_
 
 - This function accepts an array and a value
 - Loop through the array and check if the current array element is equal to the value
@@ -1643,7 +1654,7 @@ function linearSearch(arr, value){
         if(arr[i] === value)
             return i
     }
-    
+
     return -1
 }
 ```
@@ -1652,19 +1663,20 @@ BIG-O is O(1) best, O(n) is worst and average
 
 ### Lecture 33: Binary Search
 
--    Binary search is a much faster form of search
--    Rather than eliminating one element at a time, you can eliminate half of the remaining elements at a time
--    Binary search only works on sorted arrays!
+- Binary search is a much faster form of search
+- Rather than eliminating one element at a time, you can eliminate half of the remaining elements at a time
+- Binary search only works on sorted arrays!
 
 pseudocode:
--    This function accepts a sorted array and a value
--    Create a left pointer at the start of the array, and a right pointer at the end of the array
--    While the left pointer comes before the right pointer:
-     - Create a pointer in the middle
-     - If you find the value you want, return the index
-     - If the value is too small, move the left pointer up
-     - If the value is too large, move the right pointer down
--    If you never find the value, return -1
+
+- This function accepts a sorted array and a value
+- Create a left pointer at the start of the array, and a right pointer at the end of the array
+- While the left pointer comes before the right pointer:
+  - Create a pointer in the middle
+  - If you find the value you want, return the index
+  - If the value is too small, move the left pointer up
+  - If the value is too large, move the right pointer down
+- If you never find the value, return -1
 
 ```
 function binarySearch(arr,val){
@@ -1678,10 +1690,10 @@ function binarySearch(arr,val){
             r = m - 1
         else
             l = m + 1
-        
+
         m = Math.floor((l + r) / 2)
     }
-    
+
     return -1
 }
 ```
@@ -1695,15 +1707,14 @@ Worst and average case is O(log(n)), best case is O(1). It is because the number
 - Suppose you want to count the number of times a smaller string appears in a longer string
 - A straightforward approach involves checking pairs of characters individually
 
-
 Pseudocode
 
--    Loop over the longer string
--   Loop over the shorter string
--   If the characters don't match, break out of the inner loop
--    If the characters do match, keep going
--   If you complete the inner loop and find a match, increment the count of matches
--   Return the count
+- Loop over the longer string
+- Loop over the shorter string
+- If the characters don't match, break out of the inner loop
+- If the characters do match, keep going
+- If you complete the inner loop and find a match, increment the count of matches
+- Return the count
 
 ```
 function naiveSearch(str, val){
@@ -1711,7 +1722,7 @@ function naiveSearch(str, val){
     let i = 0
     while(i<str.length){
         for(let j=0; j<val.length; j++){
-            if(val[j] !== str[i+j]) break    
+            if(val[j] !== str[i+j]) break
             if(j===val.length-1) result++
         }
         i++
@@ -1795,10 +1806,10 @@ var successfulPairs = function(spells, potions, success) {
 
 Objectives
 
--    Implement bubble sort
--    Implement selection sort
--    Implement insertion sort
--    Understand why it is important to learn these simpler sorting algorithms
+- Implement bubble sort
+- Implement selection sort
+- Implement insertion sort
+- Understand why it is important to learn these simpler sorting algorithms
 
 ### Lecture 35: What is sorting?
 
@@ -1812,8 +1823,8 @@ Examples
 - Sorting movies based on revenue
 
 ### Lecture 36: JavaScript has a sort method
-but it doesn't always work as expected
 
+but it doesn't always work as expected
 
 Telling JavaScript how to sort
 
@@ -1821,9 +1832,9 @@ Telling JavaScript how to sort
 - You can use this comparator function to tell JavaScript how you want it to sort
 - The comparator looks at pairs of elements (a and b), determines their sort order based on the return value
 
-  -    If it returns a negative number, a should come before b
-  -    If it returns a positive number, a should come after b,
-  -    If it returns 0, a and b are the same as far as the sort is concerned
+  - If it returns a negative number, a should come before b
+  - If it returns a positive number, a should come after b,
+  - If it returns 0, a and b are the same as far as the sort is concerned
 
 ### Lecture 37: Bubble Sort
 
@@ -1848,7 +1859,7 @@ function bubbleSort(arr){
                 swap(arr,j,j+1)
         }
     }
-    
+
     return arr
 }
 ```
@@ -1921,13 +1932,14 @@ function selectionSort(arr){
         }
         swap(arr, i, indexOfmin)
     }
-    
+
     return arr
 }
 
 ```
 
-CLEANER VERSION : 
+CLEANER VERSION :
+
 ```
 function swap(arr,idx1,idx2){
     let temp = arr[idx1]
@@ -1945,7 +1957,7 @@ function selectionSort(arr){
         if(lowest !== i)
             swap(arr, i, lowest)
     }
-    
+
     return arr
 }
 ```
@@ -1963,7 +1975,8 @@ Insertion Sort Pseudocode
 - Continue to the next element and if it is in the incorrect order, iterate through the sorted portion (i.e. the left side) to place the element in the correct place.
 - Repeat until the array is sorted.
 
-cleaner version: 
+cleaner version:
+
 ```
 function insertionSort(arr){
     for(let i=1 ;i<arr.length; i++){
@@ -1981,7 +1994,7 @@ In worst case scenario its O(n2) but if its almost all sorted then its much bett
 
 ### Big O of Sorting Algorithms
 
-Algorithm 	Time Complexity (Best) 	Time Complexity (Average) 	Time Complexity (Worst) 	Space Complexity
+Algorithm Time Complexity (Best) Time Complexity (Average) Time Complexity (Worst) Space Complexity
 
 ```
 Bubble Sort 	O(n) 	O(n) 	O(n) 	O(1)
@@ -2011,7 +2024,7 @@ WHY LEARN THIS?
 
 FASTER SORTS
 
-- There is a family of sorting algorithms that can improve time complexity from O(n  ) to O(n log n)
+- There is a family of sorting algorithms that can improve time complexity from O(n ) to O(n log n)
 - There's a tradeoff between efficiency and simplicity
 - The more efficient algorithms are much less simple, and generally take longer to understand
 
@@ -2035,7 +2048,7 @@ Let's visualize this!
 
 [ 8 ] [ 3 ] [ 5 ] [ 4 ] [ 7 ] [ 6 ] [ 1 ] [ 2 ]
 
-[ 3, 8 ] [ 4, 5 ] [ 6, 7 ] [ 1, 2 ] 
+[ 3, 8 ] [ 4, 5 ] [ 6, 7 ] [ 1, 2 ]
 
 [ 3, 4, 5, 8 ] [ 1, 2, 6, 7 ]
 
@@ -2048,7 +2061,6 @@ Let's visualize this!
 - In order to implement merge sort, it's useful to first implement a function responsible for merging two sorted arrays
 - Given two arrays which are sorted, this helper function should create a new array which is also sorted, and consists of all of the elements in the two input arrays
 - This function should run in O(n + m) time and O(n + m) space and should not modify the parameters passed to it.
-
 
 Merging Arrays Pseudocode
 
@@ -2078,7 +2090,7 @@ function mergeTwoArrays(arr1, arr2){
         arr.push(arr1[i])
         i++
     }
-    
+
     while(j<arr2.length){
         arr.push(arr2[j])
         j++
@@ -2134,18 +2146,16 @@ function responsible for returning pivot index which is the index where array is
 - The helper should do this in place, that is, it should not create a new array
 - When complete, the helper should return the index of the pivot
 
-
 Picking a pivot
 
 - The runtime of quick sort depends in part on how one selects the pivot
 - Ideally, the pivot should be chosen so that it's roughly the median value in the data set you're sorting
 - For simplicity, we'll always choose the pivot to be the first element (we'll talk about consequences of this later)
 
-
 Pivot Pseudocode
 
 - It will help to accept three arguments: an array, a start index, and an end index (these can default to 0 and the array length minus 1, respectively)
-- Grab the pivot from the start of the array 
+- Grab the pivot from the start of the array
 - Store the current pivot index in a variable (this will keep track of where the pivot should end up)
 - Loop through the array from the start until the end
   - If the pivot is greater than the current element, increment the pivot index variable and then swap the current element with the element at the pivot index
@@ -2200,8 +2210,8 @@ Average case - O(nlogn)
 worst case - O(n2)
 space complexity - O(logn)
 
-
 ### Lecture 48: RADIX SORT
+
 Radix sort is a special sorting algorithm that works on lists of numbers
 It exploits the fact that information about the size of a number is encoded in the number of digits.  
 More digits means a bigger number!
@@ -2243,7 +2253,7 @@ mostDigits(nums) - Given an array of numbers, returns the number of digits in th
 ```
 function mostDigit(arr){
     return arr.reduce((max,i) => {
-       return max = Math.max(max, digitCount(i)) 
+       return max = Math.max(max, digitCount(i))
     },0)
 }
 
@@ -2277,7 +2287,7 @@ function digitCount(num){
 
 function mostDigit(arr){
     return arr.reduce((max,i) => {
-       return max = Math.max(max, digitCount(i)) 
+       return max = Math.max(max, digitCount(i))
     },0)
 }
 
@@ -2313,7 +2323,7 @@ Data structures are collections of values, the relationships among them, and the
 
 WHY SO MANY???
 
-Different data structures excel at different things.  Some are highly specialized, while others (like arrays) are more generally used.
+Different data structures excel at different things. Some are highly specialized, while others (like arrays) are more generally used.
 
 They all excel in different situations...
 Otherwise why bother learning them all??
@@ -2326,11 +2336,13 @@ Otherwise why bother learning them all??
 ## Singly Linked Lists
 
 Objectives
+
 - Define what a Singly Linked List is
 - Compare and contrast Linked Lists with Arrays
 - Implement insertion, removal and traversal methods on Singly Linked Lists
 
 ### Lecture 52: What is a linked list?
+
 A data structure that contains a head, tail and length property.
 Linked Lists consist of nodes, and each node has a value and a pointer to another node or null
 
@@ -2339,11 +2351,13 @@ Linked Lists consist of nodes, and each node has a value and a pointer to anothe
 Comparisons with Arrays
 
 Lists
+
 - Do not have indexes!
 - Connected via nodes with a next pointer
 - Random access is not allowed
 
 Arrays
+
 - Indexed in order!
 - Insertion and deletion can be expensive
 - Can quickly be accessed at a specific index
@@ -2391,7 +2405,7 @@ Popping pseudocode
     pop(){
         if(this.isEmpty())
             return undefined
-        
+
         let removedNode = this.tail
         if(this.getSize() === 1){
             this.head = null
@@ -2404,18 +2418,224 @@ Popping pseudocode
             prev.next = null
             this.tail = prev
         }
-        
+
         this.size--
         return removedNode
     }
 ```
 
-## Final Node and Singly Linked List class: 
+### Lecture 55: Shifting
+
+Removing a new node from the beginning of the Linked List!
+
+Shifting pseudocode
+
+- If there are no nodes, return undefined
+- Store the current head property in a variable
+- Set the head property to be the current head's next property
+- Decrement the length by 1
+- Return the value of the node removed
+
+```
+    removeFromFront(){
+        if(this.isEmpty()) return undefined
+
+        let prev = this.head
+        let node = prev
+
+        if(this.getSize() === 1){
+            this.pop()
+            return node
+        }
+
+        this.head = prev.next
+        prev.next = null
+        this.size--
+
+        return node
+    }
+```
+
+### Lecture 56: Unshifting
+
+Adding a new node to the beginning of the Linked List!
+
+Unshifting pseudocode
+
+- This function should accept a value
+- Create a new node using the value passed to the function
+- If there is no head property on the list, set the head and tail to be the newly created node
+- Otherwise set the newly created node's next property to be the current head property on the list
+- Set the head property on the list to be that newly created node
+- Increment the length of the list by 1
+- Return the linked list
+
+```
+    append(val){
+        const node = new Node(val)
+
+        if(this.isEmpty()){
+            this.head = node
+        }else{
+            this.tail.next = node
+        }
+        this.tail = node
+        this.size++
+
+        return this
+    }
+```
+
+### Lecture 57: Get
+
+Retrieving a node by it's position in the Linked List!
+
+Get pseudocode
+
+- This function should accept an index
+- If the index is less than zero or greater than or equal to the length of the list, return null
+- Loop through the list until you reach the index and return the node at that specific index
+
+```
+    get(index){
+        if(index<0 || index >= this.getSize()) return undefined
+        let prev = this.head
+        for(let i=0; i<index; i++){
+            prev = prev.next
+        }
+        return prev
+    }
+```
+
+### Lecture 58: Set
+
+Changing the value of a node based on it's position in the Linked List
+
+Set pseudocode
+
+- This function should accept a value and an index
+- Use your get function to find the specific node.
+- If the node is not found, return false
+- If the node is found, set the value of that node to be the value passed to the function and return true
+
+```
+    set(val,index){
+        let node = this.get(index)
+        if(node){
+            node.val = val
+            return node
+        }
+        return undefined
+    }
+```
+### Lecture 59: Insert
+
+Adding a node to the Linked List at a specific position
+
+Insert pseudocode
+
+- If the index is less than zero or greater than the length, return false
+- If the index is the same as the length, push a new node to the end of the list
+- If the index is 0, unshift a new node to the start of the list
+- Otherwise, using the get method, access the node at the index - 1
+- Set the next property on that node to be the new node
+- Set the next property on the new node to be the previous next
+- Increment the length
+- Return true
+
+```
+    insert(val, index){
+        const node = new Node(val)
+        if(index<0 || index > this.getSize()) return undefined
+        if(index === 0){
+            this.prepend(val)
+            return node
+        }
+
+        let prev = this.get(index-1)
+        node.next = prev.next
+        prev.next = node
+        this.size++
+        return node
+    }
+```
+
+### Lecture 60: Remove
+Removing a node from the Linked List at a specific position
+
+Remove pseudocode
+
+- If the index is less than zero or greater than the length, return undefined
+- If the index is the same as the length-1, pop
+- If the index is 0, shift
+- Otherwise, using the get method, access the node at the index - 1
+- Set the next property on that node to be the next of the next node
+- Decrement the length
+- Return the value of the node removed
+
+```
+    removeFromIndex(index){
+        if(index < 0 || index >= this.getSize()) return undefined
+        if(index === 0) return this.removeFromFront()
+        if(index === this.getSize()-1) return this.pop()
+
+        let prev = this.get(index-1)
+        let curr = prev.next
+        prev.next = curr.next
+        curr.next = null
+        this.size--
+        return curr
+    }
+```
+
+### Lecture 61: REVERSE
+
+Reversing the Linked List **in place!**
+
+Reverse pseudocode
+
+- Swap the head and tail
+- Create a variable called next
+- Create a variable called prev
+- Create a variable called node and initialize it to the head property
+- Loop through the list
+- Set next to be the next property on whatever node is
+- Set the next property on the node to be whatever prev is
+- Set prev to be the value of the node variable
+- Set the node variable to be the value of the next variable
+- Once you have finished looping, return the list
+
+```
+    reverse(){
+        if(this.isEmpty()) return undefined
+
+        let prev = null
+        let curr = this.head
+        while(curr){
+            let next = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next
+        }
+
+        this.head = prev
+        return this
+    }
+```
+
+### Lecture 62: Big O of Singly Linked Lists
+
+Insertion: O(1)
+Removal: It depends.... O(1) or O(N)
+Searching: O(N)
+Access: O(N)
+
+## Final Node and Singly Linked List class:
 
 ```
 class Node{
     constructor(val){
-        this.val = val;
+        this.val = val
         this.next = null
     }
 }
@@ -2427,60 +2647,175 @@ class SinglyLinkedList{
         this.tail = null
     }
     
-    isEmpty(){
-        return this.size === 0
-    }
-    
     getSize(){
         return this.size
     }
     
-    getAllNodeValues(){
-        if(this.isEmpty())
-            return []
-            
+    isEmpty(){
+        return this.size === 0
+    }
+
+    print(){
+        if(this.isEmpty()) return []
+
         let curr = this.head
-        let items = []
+        let values = []
         while(curr){
-            items.push(curr.val)
+            values.push(curr.val)
             curr = curr.next
         }
-        return items
+
+        return values
     }
-    
-    push(val){
+
+    prepend(val){
         const node = new Node(val)
-        if(!this.isEmpty())
-            node.next = this.head
-        else
+        if(this.isEmpty()){
             this.tail = node
+        }else{
+            node.next = this.head
+        }
         this.head = node
         this.size++
+
         return this
     }
-    
+
+    append(val){
+        const node = new Node(val)
+
+        if(this.isEmpty()){
+            this.head = node
+        }else{
+            this.tail.next = node
+        }
+        this.tail = node
+        this.size++
+
+        return this
+    }
+
     pop(){
-        if(this.isEmpty())
-            return undefined
-        
-        let removedNode = this.tail
+        if(this.isEmpty()) return undefined
+        let prev = this.head
+        let node = this.tail
+
         if(this.getSize() === 1){
             this.head = null
             this.tail = null
-        }else{
-            let prev = this.head
-            while(prev.next !== this.tail){
-                prev = prev.next
-            }
-            prev.next = null
-            this.tail = prev
+            this.size--
+            return node
         }
         
+        while(prev.next !== this.tail){
+            prev = prev.next
+        }
+
+        prev.next = null
+        this.tail = prev
         this.size--
-        return removedNode
+        return node
     }
+
+    removeFromFront(){
+        if(this.isEmpty()) return undefined
+
+        let prev = this.head
+        let node = prev
+
+        if(this.getSize() === 1){
+            this.pop()
+            return node
+        }
+
+        this.head = prev.next
+        prev.next = null
+        this.size--
+
+        return node
+    }
+
+    get(index){
+        if(index<0 || index >= this.getSize()) return undefined
+        let prev = this.head
+        for(let i=0; i<index; i++){
+            prev = prev.next
+        }
+        return prev
+    }
+
+    set(val,index){
+        let node = this.get(index)
+        if(node){
+            node.val = val
+            return node
+        }
+        return undefined
+    }
+
+    insert(val, index){
+        const node = new Node(val)
+        if(index<0 || index > this.getSize()) return undefined
+        if(index === 0){
+            this.prepend(val)
+            return node
+        }
+
+        let prev = this.get(index-1)
+        node.next = prev.next
+        prev.next = node
+        this.size++
+        return node
+    }
+
+    removeFromIndex(index){
+        if(index < 0 || index >= this.getSize()) return undefined
+        if(index === 0) return this.removeFromFront()
+        if(index === this.getSize()-1) return this.pop()
+
+        let prev = this.get(index-1)
+        let curr = prev.next
+        prev.next = curr.next
+        curr.next = null
+        this.size--
+        return curr
+    }
+
+    reverse(){
+        if(this.isEmpty()) return undefined
+
+        let prev = null
+        let curr = this.head
+        while(curr){
+            let next = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next
+        }
+
+        this.head = prev
+        return this
+    }
+    
 }
 
+const singlyLL = new SinglyLinkedList()
+
+singlyLL.prepend("All well")
+singlyLL.prepend("How are you?")
+singlyLL.prepend("There")
+console.log(singlyLL.prepend("hello"))
+singlyLL.append("Okay")
+singlyLL.prepend("I'm good too")
+
+
+// console.log(singlyLL.print())
+// console.log(singlyLL.pop())
+// console.log(singlyLL.pop())
+// console.log(singlyLL.remove())
+console.log(singlyLL.print())
+// console.log(singlyLL.insert("where have you been and", 0))
+console.log(singlyLL.insert("where have you been and", singlyLL.getSize()))
+console.log(singlyLL.print())
+
 ```
-
-
