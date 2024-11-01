@@ -2824,3 +2824,63 @@ console.log(singlyLL.print())
 Each node has two pointers next and prev, data structure is different not much different than singly linked list but advantages and usage is simpler as their are two directions two move
 
 
+```
+class Node{
+    constructor(val, next = null, prev = null){
+        this.val = val
+        this.next = next
+        this.prev = prev
+    }
+}
+
+class DoublyLinkedList{
+    constructor(){
+        this.size = 0
+        this.head = null
+        this.tail = null
+    }
+
+    getSize(){
+        return this.size
+    }
+
+    isEmpty(){
+        return this.getSize() === 0
+    }
+    
+    push(val){
+        const node = new Node(val)
+        if(this.isEmpty()){
+            this.head = node
+        }else{
+            this.tail.next = node;
+            node.prev = this.tail 
+        }
+        this.tail = node
+        this.size++
+
+        return node
+    }
+
+    pop(){
+        if(this.isEmpty()) return undefined
+        let node = this.tail
+        
+        if(this.getSize() === 1){
+            this.head = null
+            this.tail = null
+            this.size--
+            return node
+        }
+
+        this.tail = node.prev
+        this.tail.next = null
+        node.prev = null
+        this.size--
+        return node
+    }
+    
+}
+
+
+```
