@@ -2819,3 +2819,7 @@ console.log(singlyLL.insert("where have you been and", singlyLL.getSize()))
 console.log(singlyLL.print())
 
 ```
+
+## Doubly Linked List:
+Each node has two pointers next and prev, data structure is different not much different than singly linked list but advantages and usage is simpler as their are two directions two move
+
