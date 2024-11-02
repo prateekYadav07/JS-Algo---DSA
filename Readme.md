@@ -2847,6 +2847,18 @@ class DoublyLinkedList{
     isEmpty(){
         return this.getSize() === 0
     }
+
+    print(){
+        if(this.isEmpty()) return []
+
+        let curr = this.head, values = []
+        while(curr){
+            values.push(curr.val)
+            curr = curr.next
+        }
+
+        return values
+    }
     
     push(val){
         const node = new Node(val)
@@ -2879,7 +2891,43 @@ class DoublyLinkedList{
         this.size--
         return node
     }
+
+    // shift -> removing a node from the beginnning
+    shift(){
+        if(this.isEmpty()) return undefined
+        let curr = this.head
+
+        if(this.getSize() === 1) {
+            this.head = null
+            this.tail = null
+            this.size--
+            return curr
+        }
+
+        this.head = curr.next
+        curr.next = null
+        this.head.prev = null
+        this.size--
+        return curr
+    }
+
+    // unshift -> inserting a node at the beginning
+    unshift(val){
+        let node = new Node(val)
+        if(this.isEmpty()){
+            this.tail = node
+        }else{
+            node.next = this.head
+            this.head.prev = node
+        }
+
+        this.head = node
+        this.size++
+        return this
+    }
     
+    get()
+
 }
 
 
