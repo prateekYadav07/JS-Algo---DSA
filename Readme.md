@@ -2926,7 +2926,17 @@ class DoublyLinkedList{
         return this
     }
     
-    get()
+    get(index) {
+        if(index < 0 || index > this.getSize()) return null
+        let move = index <= Math.floor(this.getSize() / 2)
+        let curr = move ? this.head : this.tail
+
+        for(let i = 0; i < index; i++){
+            curr = move ? curr.next : curr.prev
+        }
+
+        return curr
+    }
 
 }
 
